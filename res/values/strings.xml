@@ -1,0 +1,30 @@
+<resources>
+
+    <string name="app_name">最美十堰</string>
+    <string name="drawer_open">打开侧边抽屉</string>
+    <string name="drawer_close">关闭侧边抽屉</string>
+    <string name="error_msg">我檫，网络连接失败，大力刷新出奇迹！</string>
+    <string name="press_again_exit">再点一次,跟你拜拜！</string>
+    <string name="title_activity_guide">首页闪屏</string>
+    <string name="title_activity_content">正文内容</string>
+    <string name="about_us">关于我们</string>
+    <string name="updata_text">跟新升级</string>
+
+    <!-- 侧边菜单icon -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_topnew</item>
+        <item>@drawable/ic_betterlife</item>
+        <item>@drawable/ic_traffic</item>
+        <item>@drawable/ic_weather</item>
+        <item>@drawable/ic_member</item>
+    </array>
+    <!-- 侧边栏目text -->
+    <string-array name="nav_drawer_items">
+        <item>今日头条</item>
+        <item>乐享十堰</item>
+        <item>十堰交通</item>
+        <item>十堰天气</item>
+        <item>会员风采</item>
+    </string-array>
+
+</resources>
