@@ -55,7 +55,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 	if (convertView == null) {
 	    LayoutInflater mInflater = (LayoutInflater) context
-		    .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+		    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    convertView = mInflater.inflate(R.layout.behind_list_show, null);
 	}
 

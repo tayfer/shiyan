@@ -53,7 +53,8 @@ public abstract class DrawerArrowDrawable extends Drawable {
 	return paramFloat1 + paramFloat3 * (paramFloat2 - paramFloat1);
     }
 
-    public void draw(Canvas canvas) {
+    @Override
+	public void draw(Canvas canvas) {
 	Rect localRect = getBounds();
 	float f1 = lerp(this.mBarSize, this.mTopBottomArrowSize, this.mProgress);
 	float f2 = lerp(this.mBarSize, this.mMiddleArrowSize, this.mProgress);
@@ -67,8 +68,8 @@ public abstract class DrawerArrowDrawable extends Drawable {
 	float f9 = -f2 / 2.0F;
 	this.mPath.moveTo(f9 + f3, 0.0F);
 	this.mPath.rLineTo(f2 - f3, 0.0F);
-	float f10 = (float) Math.round(f1 * Math.cos(f4));
-	float f11 = (float) Math.round(f1 * Math.sin(f4));
+	float f10 = Math.round(f1 * Math.cos(f4));
+	float f11 = Math.round(f1 * Math.sin(f4));
 	this.mPath.moveTo(f9, f8);
 	this.mPath.rLineTo(f10, f11);
 	this.mPath.moveTo(f9, -f8);
@@ -85,15 +86,18 @@ public abstract class DrawerArrowDrawable extends Drawable {
 	canvas.restore();
     }
 
-    public int getIntrinsicHeight() {
+    @Override
+	public int getIntrinsicHeight() {
 	return this.mSize;
     }
 
-    public int getIntrinsicWidth() {
+    @Override
+	public int getIntrinsicWidth() {
 	return this.mSize;
     }
 
-    public void setAlpha(int alpha) {
+    @Override
+	public void setAlpha(int alpha) {
 	this.mPaint.setAlpha(alpha);
     }
 
@@ -104,7 +108,8 @@ public abstract class DrawerArrowDrawable extends Drawable {
 
     public abstract boolean isLayoutRtl();
 
-    public void setColorFilter(ColorFilter colorFilter) {
+    @Override
+	public void setColorFilter(ColorFilter colorFilter) {
 	this.mPaint.setColorFilter(colorFilter);
     }
 

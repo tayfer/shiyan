@@ -13,7 +13,6 @@
 
     <drawable name="menu_item_focused">#e3e3e3</drawable>
     <drawable name="menu_item_default">#FFFFFF</drawable>
-    <drawable name="action_bar_background">#1E90FF</drawable>
 
     <color name="common_list_divider">#dfdfdf</color>
     <color name="light_gray_text">#949494</color>
