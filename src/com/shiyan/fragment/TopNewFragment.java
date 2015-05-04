@@ -8,9 +8,10 @@
  * it only in accordance with the terms of the license agreement
  * you entered into with KELADI.
  ***********************************************************************/
- 
- package com.shiyan.fragment;
 
+package com.shiyan.fragment;
+
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 /*******************************************
@@ -23,6 +24,9 @@ import android.support.v4.app.Fragment;
  *******************************************/
 
 public class TopNewFragment extends Fragment {
-
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+	}
 }
-

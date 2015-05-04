@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/list_selector" >
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:id="@+id/imageview_behind_icon"
@@ -20,6 +19,6 @@
         android:layout_toRightOf="@id/imageview_behind_icon"
         android:gravity="center_vertical"
         android:paddingRight="40dp"
-        android:textColor="#fff" />
+        android:textColor="@color/drawer_text_color" />
 
 </RelativeLayout>

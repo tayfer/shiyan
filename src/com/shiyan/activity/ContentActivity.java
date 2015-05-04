@@ -3,28 +3,23 @@ package com.shiyan.activity;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import android.app.ActionBar;
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.shiyan.R;
 import com.shiyan.adapter.NavDrawerListAdapter;
 import com.shiyan.fragment.BetterLifeFragment;
@@ -32,10 +27,9 @@ import com.shiyan.fragment.MemberFragment;
 import com.shiyan.fragment.TopNewFragment;
 import com.shiyan.fragment.TrafficFragment;
 import com.shiyan.fragment.WeatherFragment;
-import com.shiyan.util.DeviceInfo;
 import com.shiyan.vo.NavDrawerItem;
 
-public class ContentActivity extends FragmentActivity {
+public class ContentActivity extends ActionBarActivity {
 	private ActionBarDrawerToggle mDrawerToggle;
 	private DrawerLayout mDrawerLayout;
 	private NavDrawerListAdapter adapter;
@@ -45,20 +39,22 @@ public class ContentActivity extends FragmentActivity {
 	private ArrayList<CloseSoftKeyboardListener> myListeners = new ArrayList<CloseSoftKeyboardListener>();
 	private String[] navMenuTitles;
 	private final String TAG = ContentActivity.class.getName();
+	private Toolbar toolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_content);
 
-		setActionBarStyle();// 设置actionbar
+		setUpToolBar();// 设置toolbar
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.content_drawer);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
 				GravityCompat.START);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
 				R.string.drawer_open, R.string.drawer_close) {
+
 			@Override
 			public void onDrawerClosed(View view) {
 				invalidateOptionsMenu();
@@ -69,21 +65,20 @@ public class ContentActivity extends FragmentActivity {
 				invalidateOptionsMenu();
 				closeSoftKeyboard();
 			}
-
 		};// 设置抽屉开关
 
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 		initLiftView();// 初始化列表数据
-		// displayView(0);// 自动初始化第一页数据
+		displayView(0);// 自动初始化第一页数据
 	}
 
 	private void initLiftView() {
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 		adapter = new NavDrawerListAdapter(getApplicationContext(), getData());
-		View headView = LayoutInflater.from(this).inflate(R.layout.head_view,
-				null);
-		mDrawerList.addHeaderView(headView);// 为listview添加头部view
+		// View headView = LayoutInflater.from(this).inflate(R.layout.head_view,
+		// null);
+		// mDrawerList.addHeaderView(headView);// 为listview添加头部view
 		mDrawerList.setAdapter(adapter);
 
 	}
@@ -105,9 +100,9 @@ public class ContentActivity extends FragmentActivity {
 	private void displayView(int position) {
 		// update the main content by replacing fragments
 		Fragment fragment = null;
-		if (!DeviceInfo.isNetworkAvailable(this)) {
-			Toast.makeText(this, R.string.error_msg, Toast.LENGTH_SHORT).show();
-		}
+		// if (!DeviceInfo.isNetworkAvailable(this)) {
+		// Toast.makeText(this, R.string.error_msg, Toast.LENGTH_SHORT).show();
+		// }
 		switch (position) {
 		case 0:
 			curItem = 0;
@@ -148,22 +143,16 @@ public class ContentActivity extends FragmentActivity {
 		mDrawerList.setItemChecked(position, true);
 		mDrawerList.setSelection(position);
 		mDrawerLayout.closeDrawer(mDrawerList);
-		this.getActionBar().setTitle(title);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		this.getSupportActionBar().setTitle(title);
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean isDrawerOper = mDrawerLayout.isDrawerOpen(mDrawerList);
 		if (isDrawerOper) {
-			this.getActionBar().setTitle("最美十堰");
+			this.getSupportActionBar().setTitle("最美十堰");
 		} else {
-			this.getActionBar().setTitle(title);
+			this.getSupportActionBar().setTitle(title);
 		}
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -203,19 +192,14 @@ public class ContentActivity extends FragmentActivity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	private void setActionBarStyle() {
-		ActionBar actionBar = getActionBar();
-		Drawable actionBarDrawable = this.getBaseContext().getResources()
-				.getDrawable(R.drawable.action_bar_background);
-		actionBar.setBackgroundDrawable(actionBarDrawable);
-		getActionBar().setIcon(R.color.transparent);
-		int titleId = Resources.getSystem().getIdentifier("action_bar_title",
-				"id", "android");
-		TextView textView = (TextView) findViewById(titleId);
-		textView.setTextColor(0xFFdfdfdf);
-		textView.setTextSize(17);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+	@SuppressLint("NewApi")
+	private void setUpToolBar() {
+		toolbar = (Toolbar) findViewById(R.id.container_toolbar);
+		toolbar.setBackground(getResources().getDrawable(
+				R.drawable.toolbar_backgroud));
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
 	/**
