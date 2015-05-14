@@ -20,53 +20,53 @@ import android.os.Message;
  */
 public class WelcomeActivity extends Activity {
 
-    private static final int GO_HOME = 100;
-    private static final int GO_GUIDE = 200;
-    boolean isFirst = false;
-    private Handler mHandler = new Handler() {
+	private static final int GO_HOME = 100;
+	private static final int GO_GUIDE = 200;
+	boolean isFirst = false;
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case GO_HOME:
+				goHome();
+				break;
+			case GO_GUIDE:
+				goHome();
+				break;
+			}
+		}
+	};
+
 	@Override
-	public void handleMessage(Message msg) {
-	    switch (msg.what) {
-	    case GO_HOME:
-		goHome();
-		break;
-	    case GO_GUIDE:
-		goGuide();
-		break;
-	    }
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		init();
 	}
-    };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	init();
-    }
-
-    private void init() {
-	SharedPreferences preferences = getSharedPreferences("first_pref",
-		MODE_PRIVATE);
-	isFirst = preferences.getBoolean("isFirst", true);
-	if (!isFirst) {
-	    mHandler.sendEmptyMessageDelayed(GO_HOME, 2800);
-	} else {
-	    mHandler.sendEmptyMessageDelayed(GO_GUIDE, 2800);
+	private void init() {
+		SharedPreferences preferences = getSharedPreferences("first_pref",
+				MODE_PRIVATE);
+		isFirst = preferences.getBoolean("isFirst", true);
+		if (!isFirst) {
+			mHandler.sendEmptyMessageDelayed(GO_HOME, 2800);
+		} else {
+			mHandler.sendEmptyMessageDelayed(GO_GUIDE, 2800);
+		}
 	}
-    }
 
-    private void goHome() {
-	Intent intent = new Intent(WelcomeActivity.this, ContentActivity.class);
-	startActivity(intent);
-	overridePendingTransition(android.R.anim.fade_in,
-		android.R.anim.fade_out);
-	this.finish();
-    }
+	private void goHome() {
+		Intent intent = new Intent(WelcomeActivity.this, ContentActivity.class);
+		startActivity(intent);
+		overridePendingTransition(android.R.anim.fade_in,
+				android.R.anim.fade_out);
+		this.finish();
+	}
 
-    private void goGuide() {
-	Intent intent = new Intent(WelcomeActivity.this, GuideActivity.class);
-	startActivity(intent);
-	overridePendingTransition(android.R.anim.fade_in,
-		android.R.anim.fade_out);
-	this.finish();
-    }
+	private void goGuide() {
+		Intent intent = new Intent(WelcomeActivity.this, GuideActivity.class);
+		startActivity(intent);
+		overridePendingTransition(android.R.anim.fade_in,
+				android.R.anim.fade_out);
+		this.finish();
+	}
 }

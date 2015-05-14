@@ -1,11 +1,11 @@
 <resources>
 
-    <string name="app_name">最美十堰</string>
+    <string name="app_name">十堰网</string>
     <string name="drawer_open">打开侧边抽屉</string>
     <string name="drawer_close">关闭侧边抽屉</string>
     <string name="error_msg">我檫，网络连接失败，大力刷新出奇迹！</string>
     <string name="press_again_exit">再点一次,跟你拜拜！</string>
-    
+
     <!-- 侧边菜单icon -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_topnew</item>
@@ -14,7 +14,7 @@
         <item>@drawable/ic_weather</item>
         <item>@drawable/ic_member</item>
     </array>
-    
+
     <!-- 侧边栏目text -->
     <string-array name="nav_drawer_items">
         <item>今日头条</item>
